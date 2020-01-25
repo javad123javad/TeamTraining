@@ -1,16 +1,36 @@
 #include "Personnel.h"
 
-template<typename T, typename S>
-Personnel<T, S>::Personnel() {
+
+Personnel::Personnel(const Personnel& lhs):
+_staffList(lhs._staffList)
+{
 
 }
 
-template<typename T, typename S>
-Personnel<T, S>::Personnel(const Personnel& lhs) {
+Personnel & Personnel::operator=(const Personnel& lhs){
 
+	if (this == &lhs)
+		return *this;
+	_staffList = lhs._staffList;
+	return *this;
 }
 
-template<typename T, typename S>
-Personnel<T, S>::~Personnel() {
+Personnel::Personnel(Personnel&& lhs)noexcept{
+	_staffList = std::move(lhs._staffList);
+	lhs._staffList.clear();
+}
+
+void Personnel::addStaff(Staff* const  i_staff)
+{
+	_staffList.push_back(const_cast<Staff*>(i_staff));
+}
+
+
+Personnel::Personnel(const std::vector<Staff*>& i_staff):
+	_staffList(i_staff)
+{
+}
+
+Personnel::~Personnel() {
 
 }

@@ -2,10 +2,24 @@
 //
 
 #include <iostream>
+#include "Personnel.h"
+#include "Staff.h"
 
 int main()
 {
-    std::cout << "Hello World!\n";
+    Staff S1("Javad", "Rahimi"), S2("Hamed","Rahimi");
+    std::cout << "S1: " << S1.returnInfo() << std::endl;
+    std::cout << "S2: " << S2.returnInfo() << std::endl;
+    //S2 = S1;
+    std::swap(S2, S1);
+    std::cout << "S2: " << S2.returnInfo() << std::endl;
+    Staff S3(std::move(S2));
+    std::cout << "S2: " << S2.returnInfo() << std::endl;
+    /*****************/
+    Personnel P1;
+    P1.addStaff(&S1);
+
+    Personnel P2(std::move(P1));
 }
 
 // Run program: Ctrl + F5 or Debug > Start Without Debugging menu
